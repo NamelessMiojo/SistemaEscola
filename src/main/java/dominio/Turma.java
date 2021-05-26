@@ -6,18 +6,21 @@
 package dominio;
 
 import enumerator.eModEnsino;
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author Arthur
  */
+
+@Getter @Setter @NoArgsConstructor
 public class Turma {
     
     private int nome;
     private eModEnsino ensino;
     private int ano;
     private int totalAlunos;
-    
 
 }
