@@ -6,6 +6,12 @@
 package dominio;
 
 import enumerator.eModEnsino;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,12 +21,27 @@ import lombok.Setter;
  * @author Arthur
  */
 
+@Entity
+@Table(name = "turma")
 @Getter @Setter @NoArgsConstructor
-public class Turma {
+public class Turma implements Serializable{
     
-    private int nome;
+    @Id
+    @Column(name = "TUR_CODIGO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int codigo;
+    
+    @Column(name = "TUR_NOME")
+    private String nome;
+    
+    @Column(name = "TUR_ENSINO")
     private eModEnsino ensino;
+    
+    @Column(name = "TUR_ANO")
     private int ano;
-    private int totalAlunos;
+    
+    @Column(name = "TUR_QUANTIDADE")
+    private int quantidade;
+    
 
 }
