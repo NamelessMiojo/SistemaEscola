@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,7 +23,7 @@ import lombok.Setter;
  */
 
 @Entity
-@Table(name = "turma")
+@Table(name = "TURMA")
 @Getter @Setter @NoArgsConstructor
 public class Turma implements Serializable{
     
@@ -35,7 +36,7 @@ public class Turma implements Serializable{
     private String nome;
     
     @Column(name = "TUR_ENSINO")
-    private eModEnsino ensino;
+    private String ensino;
     
     @Column(name = "TUR_ANO")
     private int ano;
