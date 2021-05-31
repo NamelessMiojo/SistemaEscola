@@ -13,29 +13,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.DesktopPaneUI;
 
 /**
  *
  * @author Arthur
  */
-public class telaTurma extends javax.swing.JFrame {
-    
+public class telaTurma extends javax.swing.JInternalFrame {
+
     TurmaController controller = new TurmaController();
-    
+
     /**
      * Creates new form telaTurma
      */
     public telaTurma() {
         initComponents();
-        this.setLocationRelativeTo(null);
         this.txtCodigo.setEnabled(false);
-        //List<String> mods = new ArrayList<>();
-        //eModEnsino modEnsino;
-        //eModEnsino.values().
-        //System.out.println(modEnsino.getDescricao());
-        
-        //ComboBoxModel cbm = new ComboBoxModel();
         jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel(eModEnsino.values()));
+        jcbModEnsino.setSelectedIndex(-1);
     }
 
     /**
@@ -182,63 +177,59 @@ public class telaTurma extends javax.swing.JFrame {
         }
 
         Turma turma = new Turma();
+
         turma.setNome(txtNome.getText());
         turma.setAno(Integer.parseInt(txtAno.getText()));
         turma.setEnsino(jcbModEnsino.getSelectedItem().toString());
+        turma.setQuantidade(0);
 
-        
+        turma = controller.CadastrarTurma(turma);
+
+        if (turma.getCodigo() > 0) {
+            JOptionPane.showMessageDialog(null, "Turma cadastrada com Sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar Turma!");
+        }
+
+
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtualizarActionPerformed
+        
+        try {
+            if (Integer.parseInt(txtAno.getText()) > 0) {
+                JOptionPane.showMessageDialog(null, "Ano de nascimento inválido!");
+                return;
+            }
 
-        if(Integer.parseInt(txtAno.getText()) > 0){
-            JOptionPane.showMessageDialog(null, "Ano de nascimento inválido!");
-            return;
+            Turma turma = new Turma();
+            turma.setCodigo(Integer.parseInt(txtCodigo.getText()));
+            turma.setNome(txtNome.getText());
+            turma.setAno(Integer.parseInt(txtAno.getText()));
+            turma.setEnsino(jcbModEnsino.getSelectedItem().toString());
+
+            controller.atualizarCadastro(turma);
+            JOptionPane.showMessageDialog(null, "Turma atualizada com sucesso");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar Turma");
         }
 
-        Turma turma = new Turma();
-        turma.setCodigo(Integer.parseInt(txtCodigo.getText()));
-        turma.setNome(txtNome.getText());
-        turma.setAno(Integer.parseInt(txtAno.getText()));
-
-        /*if(jRBSim.isSelected()){
-            turma.setPCD(1);
-        }else if(jRBNao.isSelected()){
-            turma.setPCD(0);
-        }else{
-            JOptionPane.showMessageDialog(null, "Preencha todas as informações.");
-            return;
-        }
-
-        //turma.setTurma(turma);
-
-        controller.atualizarCadastro(turma);
-
-        if(turma.getMatricula() != null){
-            JOptionPane.showMessageDialog(null, "turma atualizado com Sucesso!");
-        }else{
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar turma!");
-        }*/
     }//GEN-LAST:event_jBAtualizarActionPerformed
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
         Turma turma = null;
         turma = controller.removerTurma(Integer.parseInt(txtCodigo.getText()));
 
-        if(turma != null){
+        if (turma != null) {
             JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
 
-            telaPrincipal tela = new telaPrincipal();
-            tela.setVisible(true);
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
-        telaPrincipal tela = new telaPrincipal();
-        tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
 

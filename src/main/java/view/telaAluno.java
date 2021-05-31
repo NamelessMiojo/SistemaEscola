@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author savio
  */
-public class telaAluno extends javax.swing.JFrame {
+public class telaAluno extends javax.swing.JInternalFrame {
     
     AlunoController controller = new AlunoController();
     Turma turma = null;
@@ -27,13 +27,13 @@ public class telaAluno extends javax.swing.JFrame {
      */
     public telaAluno() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         this.txtMatricula.setEnabled(false);
     }
     
     public telaAluno(Turma turma) {
         initComponents();
-        this.setLocationRelativeTo(null);
+        //this.setLocationRelativeTo(null);
         this.turma = turma;
         this.txtMatricula.setEnabled(false);
     }
@@ -226,8 +226,6 @@ public class telaAluno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
-        telaPrincipal tela = new telaPrincipal();
-        tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
 
