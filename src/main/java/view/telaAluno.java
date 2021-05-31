@@ -256,11 +256,9 @@ public class telaAluno extends javax.swing.JFrame {
         //aluno.setTurma(turma);
         TurmaDao turmadao = new TurmaDao();
         
-        aluno.setListaTurma(new ArrayList<Turma>());
         Turma turma = turmadao.buscarTurmaPorCodigo(Integer.parseInt(txtCodigoturma.getText()));
-        aluno.addTurma(turma);
-        aluno.addTurma(turma);
-        aluno.addTurma(turma);
+        
+        aluno.setTurma(turma);
         
         aluno = controller.cadastrarAluno(aluno);
         

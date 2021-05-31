@@ -6,10 +6,12 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,7 +29,7 @@ import lombok.Setter;
  */
 
 @Entity
-@Table(name = "AlUNO")
+@Table(name = "ALUNO")
 @Getter @Setter @NoArgsConstructor
 public class Aluno implements Serializable{
     
@@ -45,11 +47,7 @@ public class Aluno implements Serializable{
     @Column(name = "ALU_PCD")
     private int PCD;
     
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "TUR_CODIGO")
-    private List<Turma> listaTurma;
-    
-    public void addTurma(Turma turma){
-        this.listaTurma.add(turma);
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FK_TURMA_TUR_CODIGO")
+    private Turma turma;
 }
