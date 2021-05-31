@@ -9,6 +9,10 @@ package dao;
  *
  * @author Arthur
  */
-public class turmaDao {
+public class turmaDao {    
+    private static EntityManagerFactory entityManagerFactory = 
+            Persistence.createEntityManagerFactory("sistemaEscola");
+    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+    
     
 }
