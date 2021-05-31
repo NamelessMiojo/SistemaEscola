@@ -23,6 +23,28 @@ public class TurmaDao {
             Persistence.createEntityManagerFactory("sistemaEscola");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
     
+    
+    public Turma cadastrarTurma(Turma turma){
+        entityManager.getTransaction().begin();
+        entityManager.persist(turma);
+        entityManager.getTransaction().commit();
+        return turma;
+    }
+    
+    public Turma atualizarTurma(Turma turma){
+        entityManager.getTransaction().begin();
+        entityManager.merge(turma);
+        entityManager.getTransaction().commit();
+        return turma;
+    }
+    
+    public Turma deletarTurma(Turma turma){
+        entityManager.getTransaction().begin();
+        entityManager.remove(turma);
+        entityManager.getTransaction().commit();
+        return turma;
+    }
+        
     public Turma buscarTurmaPorCodigo(Integer codigo){
         return entityManager.find(Turma.class, codigo);
     }
