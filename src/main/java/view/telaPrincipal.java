@@ -5,6 +5,10 @@
  */
 package view;
 
+import java.awt.Dimension;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Arthur
@@ -17,8 +21,8 @@ public class telaPrincipal extends javax.swing.JFrame {
     public telaPrincipal() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-    }
-
+    }  
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,14 +109,14 @@ public class telaPrincipal extends javax.swing.JFrame {
 
     private void menuTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTurmaActionPerformed
         telaTurma telaT = new telaTurma();
-        this.desktopPane.add(telaT);
-        telaT.setVisible(true);
+        this.desktopPane.add(telaT);        
+        telaT.setVisible(true);        
     }//GEN-LAST:event_menuTurmaActionPerformed
 
     private void menuAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlunoActionPerformed
         telaAluno telaA = new telaAluno();
-        this.desktopPane.add(telaA);
-        telaA.setVisible(true);
+        this.desktopPane.add(telaA);        
+        telaA.setVisible(true);     
     }//GEN-LAST:event_menuAlunoActionPerformed
 
     /**

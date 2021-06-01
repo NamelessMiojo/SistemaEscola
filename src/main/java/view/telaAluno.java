@@ -192,7 +192,7 @@ public class telaAluno extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -219,7 +219,8 @@ public class telaAluno extends javax.swing.JInternalFrame {
                     .addComponent(jBAtualizar)
                     .addComponent(jBExcluir))
                 .addGap(26, 26, 26)
-                .addComponent(jBvoltar))
+                .addComponent(jBvoltar)
+                .addGap(10, 10, 10))
         );
 
         pack();
@@ -263,8 +264,7 @@ public class telaAluno extends javax.swing.JInternalFrame {
         if(aluno.getMatricula()!= null){
             JOptionPane.showMessageDialog(null, "Aluno cadastrado com Sucesso!");
 
-            telaPrincipal tela = new telaPrincipal();
-            tela.setVisible(true);
+            
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar Aluno!");
@@ -310,8 +310,7 @@ public class telaAluno extends javax.swing.JInternalFrame {
         if(aluno != null){
             JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
 
-            telaPrincipal tela = new telaPrincipal();
-            tela.setVisible(true);
+            
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");
