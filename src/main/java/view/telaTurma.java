@@ -9,11 +9,16 @@ import controller.TurmaController;
 import dao.TurmaDao;
 import dominio.Turma;
 import enumerator.eModEnsino;
+import java.awt.Dimension;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.DesktopPaneUI;
+
 
 /**
  *
@@ -22,16 +27,22 @@ import javax.swing.plaf.DesktopPaneUI;
 public class telaTurma extends javax.swing.JInternalFrame {
 
     TurmaController controller = new TurmaController();
-
+    
+           
+    
     /**
      * Creates new form telaTurma
      */
     public telaTurma() {
-        initComponents();
+        initComponents();      
+        
         this.txtCodigo.setEnabled(false);
+        eModEnsino mod;
         jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel(eModEnsino.values()));
         jcbModEnsino.setSelectedIndex(-1);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
