@@ -29,6 +29,8 @@ public class telaAluno extends javax.swing.JInternalFrame {
         initComponents();
         //this.setLocationRelativeTo(null);
         this.txtMatricula.setEnabled(false);
+        this.txtCodigoturma.setEnabled(false);
+        this.txtNomeTurma.setEnabled(false);
     }
     
     public telaAluno(Turma turma) {
@@ -36,6 +38,8 @@ public class telaAluno extends javax.swing.JInternalFrame {
         //this.setLocationRelativeTo(null);
         this.turma = turma;
         this.txtMatricula.setEnabled(false);
+        this.txtCodigoturma.setEditable(false);
+        this.txtNomeTurma.setEditable(false);
     }
 
     /**
@@ -68,7 +72,7 @@ public class telaAluno extends javax.swing.JInternalFrame {
         jRBSim = new javax.swing.JRadioButton();
         jRBNao = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setText("MATRÍCULA:");
 
@@ -163,12 +167,9 @@ public class telaAluno extends javax.swing.JInternalFrame {
                         .addGap(57, 57, 57)
                         .addComponent(jBCadastrar)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBvoltar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jBAtualizar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jBExcluir))))
+                        .addComponent(jBAtualizar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBExcluir))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,7 +187,10 @@ public class telaAluno extends javax.swing.JInternalFrame {
                         .addGap(38, 38, 38)
                         .addComponent(jRBSim)
                         .addGap(41, 41, 41)
-                        .addComponent(jRBNao)))
+                        .addComponent(jRBNao))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(jBvoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -211,15 +215,16 @@ public class telaAluno extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(jRBSim)
                     .addComponent(jRBNao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrar)
                     .addComponent(jBAtualizar)
                     .addComponent(jBExcluir))
-                .addGap(26, 26, 26)
-                .addComponent(jBvoltar))
+                .addGap(18, 18, 18)
+                .addComponent(jBvoltar)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,9 +267,6 @@ public class telaAluno extends javax.swing.JInternalFrame {
         
         if(aluno.getMatricula()!= null){
             JOptionPane.showMessageDialog(null, "Aluno cadastrado com Sucesso!");
-
-            telaPrincipal tela = new telaPrincipal();
-            tela.setVisible(true);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar Aluno!");
@@ -291,13 +293,13 @@ public class telaAluno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Preencha todas as informações.");
             return;
         }
-        
         //aluno.setTurma(turma);
         
         controller.atualizarCadastro(aluno);
 
         if(aluno.getMatricula() != null){
             JOptionPane.showMessageDialog(null, "Aluno atualizado com Sucesso!");
+            this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao atualizar Aluno!");
         }
@@ -309,9 +311,6 @@ public class telaAluno extends javax.swing.JInternalFrame {
         
         if(aluno != null){
             JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
-
-            telaPrincipal tela = new telaPrincipal();
-            tela.setVisible(true);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");

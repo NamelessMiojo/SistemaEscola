@@ -7,6 +7,7 @@ package controller;
 
 import dao.TurmaDao;
 import dominio.Turma;
+import java.util.List;
 
 /**
  *
@@ -30,5 +31,9 @@ public class TurmaController {
     
     public Turma buscarTurmaPorCodigo(Integer codigo){
         return dao.buscarTurmaPorCodigo(codigo);
+    }
+    
+    public List<Turma> buscarTodasTurma(){
+        return dao.buscarTodasTurma();
     }
 }

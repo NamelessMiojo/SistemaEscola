@@ -5,6 +5,9 @@
  */
 package enumerator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Arthur
@@ -23,5 +26,4 @@ public enum eModEnsino {
     public String getDescricao() {
         return descricao;
     }
-    
 }
