@@ -11,7 +11,7 @@ import dominio.Turma;
  *
  * @author savio
  */
-public class telaRelacionarAluno extends javax.swing.JFrame {
+public class telaRelacionarAluno extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form telaRelacionarAluno
@@ -113,6 +113,11 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         jLabel8.setText("ALUNO COM DEFICIÊNCIA:");
 
         jBBuscar.setText("BUSCAR");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -133,6 +138,11 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
@@ -140,6 +150,11 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         }
 
         jButton1.setText("ADICIONAR ALUNO A TURMA");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -271,6 +286,18 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

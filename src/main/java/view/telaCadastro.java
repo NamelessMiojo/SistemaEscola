@@ -9,7 +9,7 @@ package view;
  *
  * @author savio
  */
-public class telaCadastro extends javax.swing.JFrame {
+public class telaCadastro extends javax.swing.JInternalFrame{
 
     /**
      * Creates new form telaCadastro
@@ -27,14 +27,24 @@ public class telaCadastro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbCadastrarAluno = new javax.swing.JButton();
+        jbCadastrarTurma = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("CADASTRAR ALUNO");
+        jbCadastrarAluno.setText("CADASTRAR ALUNO");
+        jbCadastrarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastrarAlunoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("CADASTRAR TURMA");
+        jbCadastrarTurma.setText("CADASTRAR TURMA");
+        jbCadastrarTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCadastrarTurmaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -43,22 +53,37 @@ public class telaCadastro extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(138, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jbCadastrarTurma)
+                    .addComponent(jbCadastrarAluno))
                 .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(104, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jbCadastrarAluno)
                 .addGap(54, 54, 54)
-                .addComponent(jButton2)
+                .addComponent(jbCadastrarTurma)
                 .addGap(96, 96, 96))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarAlunoActionPerformed
+        telaAluno telaA = new telaAluno();
+        this.desktopPane.add(telaA);
+        telaA.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jbCadastrarAlunoActionPerformed
+
+    private void jbCadastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarTurmaActionPerformed
+        telaRelacionar telaR = new telaRelacionar();
+        this.desktopPane.add(telaR);
+        telaR.setVisible(true);
+        
+    }//GEN-LAST:event_jbCadastrarTurmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -96,7 +121,7 @@ public class telaCadastro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jbCadastrarAluno;
+    private javax.swing.JButton jbCadastrarTurma;
     // End of variables declaration//GEN-END:variables
 }

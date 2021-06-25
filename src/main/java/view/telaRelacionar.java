@@ -9,6 +9,8 @@ import controller.TurmaController;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 
 import dominio.Turma;
 
@@ -16,7 +18,7 @@ import dominio.Turma;
  *
  * @author savio
  */
-public class telaRelacionar extends javax.swing.JFrame {
+public class telaRelacionar extends javax.swing.JInternalFrame {
 
     TurmaController controller = new TurmaController();
     
@@ -131,10 +133,10 @@ public class telaRelacionar extends javax.swing.JFrame {
        
        Turma turma = controller.buscarTurmaPorCodigo(codigo);
        
-       telaRelacionarAluno tela = new telaRelacionarAluno(turma);
-       tela.setVisible(true);
-       this.dispose();
-       
+       telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);
+       this.desktopPane.add(telaRA);
+       telaRA.setVisible(true);    
+              
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
