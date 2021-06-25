@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 public class telaTurma extends javax.swing.JInternalFrame {
 
     TurmaController controller = new TurmaController();
-    
+    Turma turma = null;
            
     
     /**
@@ -37,9 +37,18 @@ public class telaTurma extends javax.swing.JInternalFrame {
         initComponents();      
         
         this.txtCodigo.setEnabled(false);
+        this.txtQuantidade.setEnabled(false);
         eModEnsino mod;
         jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel(eModEnsino.values()));
         jcbModEnsino.setSelectedIndex(-1);
+    }
+    
+    public telaTurma(Turma turma) {
+        initComponents();      
+        this.txtCodigo.setEnabled(false);
+        this.txtQuantidade.setEnabled(false);
+        this.turma = turma;
+        preencherTela();
     }
     
     
@@ -66,8 +75,10 @@ public class telaTurma extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jBvoltar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jBCadastrar.setText("CADASTRAR");
         jBCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,37 +123,45 @@ public class telaTurma extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("QUANTIDADE:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jcbModEnsino, 0, 247, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtNome)
-                        .addComponent(txtCodigo)
-                        .addComponent(txtAno, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jBCadastrar)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBvoltar)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBAtualizar)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbModEnsino, 0, 247, Short.MAX_VALUE)
+                            .addComponent(txtNome)
+                            .addComponent(txtCodigo)
+                            .addComponent(txtAno, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jBCadastrar)
                         .addGap(18, 18, 18)
-                        .addComponent(jBExcluir)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBvoltar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBAtualizar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBExcluir)))
+                        .addGap(0, 46, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addGap(63, 63, 63)
+                        .addComponent(txtQuantidade)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,9 +182,13 @@ public class telaTurma extends javax.swing.JInternalFrame {
                     .addComponent(txtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jcbModEnsino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(58, 58, 58)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCadastrar)
                     .addComponent(jBAtualizar)
@@ -289,9 +312,19 @@ public class telaTurma extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JComboBox<String> jcbModEnsino;
     private javax.swing.JTextField txtAno;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherTela() {
+        txtCodigo.setText(turma.getCodigo().toString());
+        txtAno.setText(turma.getAno().toString());
+        txtNome.setText(turma.getNome());
+        txtQuantidade.setText(turma.getQuantidade().toString());
+        jcbModEnsino.setSelectedItem(turma.getEnsino());
+    }
 }

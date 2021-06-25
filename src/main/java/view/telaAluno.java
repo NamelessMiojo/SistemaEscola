@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class telaAluno extends javax.swing.JInternalFrame {
     
     AlunoController controller = new AlunoController();
-    Turma turma = null;
+    Aluno aluno = null;
     
     /**
      * Creates new form telaAluno
@@ -29,17 +29,18 @@ public class telaAluno extends javax.swing.JInternalFrame {
         initComponents();
         //this.setLocationRelativeTo(null);
         this.txtMatricula.setEnabled(false);
-        this.txtCodigoturma.setEnabled(false);
         this.txtNomeTurma.setEnabled(false);
     }
     
-    public telaAluno(Turma turma) {
+    public telaAluno(Aluno aluno) {
         initComponents();
         //this.setLocationRelativeTo(null);
-        this.turma = turma;
+        this.aluno = aluno;
         this.txtMatricula.setEnabled(false);
         this.txtCodigoturma.setEditable(false);
         this.txtNomeTurma.setEditable(false);
+        
+        preencherTela();
     }
 
     /**
@@ -316,39 +317,15 @@ public class telaAluno extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(telaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(telaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(telaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(telaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void preencherTela() {
+        txtAnoNascimento.setText(aluno.getAnoNascimento().toString());
+        txtMatricula.setText(aluno.getMatricula().toString());
+        txtNome.setText(aluno.getNome());
+        
+        if(aluno.getTurma() != null){
+            txtNomeTurma.setText(aluno.getTurma().getNome());
+            txtCodigoturma.setText(aluno.getTurma().getCodigo().toString());
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new telaAluno().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -373,4 +350,6 @@ public class telaAluno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
+
+    
 }
