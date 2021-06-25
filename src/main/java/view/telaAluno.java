@@ -11,16 +11,18 @@ import dominio.Aluno;
 import dominio.Turma;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author savio
  */
-public class telaAluno extends javax.swing.JInternalFrame {
+public class telaAluno extends javax.swing.JInternalFrame{
     
     AlunoController controller = new AlunoController();
     Aluno aluno = null;
+    JDesktopPane desktop;
     
     /**
      * Creates new form telaAluno
@@ -30,8 +32,8 @@ public class telaAluno extends javax.swing.JInternalFrame {
         //this.setLocationRelativeTo(null);
         this.txtMatricula.setEnabled(false);
         this.txtNomeTurma.setEnabled(false);
-    }
-    
+    }    
+   
     public telaAluno(Aluno aluno) {
         initComponents();
         //this.setLocationRelativeTo(null);
@@ -232,6 +234,9 @@ public class telaAluno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+        telaCadastro telaC = new telaCadastro();
+        telaPrincipal.desktopPane.add(telaC);
+        telaC.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
 
