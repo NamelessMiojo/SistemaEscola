@@ -74,6 +74,7 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         jBCadastrarAluno = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtTurmaQuantidade = new javax.swing.JTextField();
+        jBRemover = new javax.swing.JButton();
 
         setTitle("TELA MANUTENÇÃO DA TURMA");
 
@@ -226,8 +227,8 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel9.setText("ALUNOS DA TURMA");
@@ -240,6 +241,13 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         });
 
         jLabel10.setText("QUANTIDADE:");
+
+        jBRemover.setText("REMOVER ALUNO DA TURMA");
+        jBRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBRemoverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,7 +281,9 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(66, 66, 66)
+                .addComponent(jBRemover)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBCadastrarAluno)
                 .addGap(169, 169, 169))
         );
@@ -283,7 +293,7 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -308,10 +318,12 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBCadastrarAluno)
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBCadastrarAluno)
+                    .addComponent(jBRemover))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -338,13 +350,16 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         
         if(aluno.getTurma() == null){
             //Alterando quantidade turma
+            System.out.println("Quantidade Antes:" + turma.getQuantidade().toString());
             turma.setQuantidade(turma.getQuantidade()+1);
             controllerTurma.atualizarCadastro(turma);
-                
+            
+            System.out.println("Quantidade Depois:" + turma.getQuantidade().toString()); 
             //Alterando turma do aluno
             aluno.setTurma(turma);
             controllerAluno.atualizarCadastro(aluno);
-            
+            preencherTurma();
+            preencherTabelaAlunos(new Aluno());
             return;
         }
         
@@ -368,17 +383,43 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                 //Alterando turma do aluno
                 aluno.setTurma(turma);
                 controllerAluno.atualizarCadastro(aluno);
+                JOptionPane.showMessageDialog(null,"Cadastros realizado com sucesso!");
+                preencherTurma();
+                preencherTabelaAlunos(new Aluno());
+                return;
+            }else{
+                JOptionPane.showMessageDialog(null,"Operação cancelada");
             }
-            
-            return;
+            JOptionPane.showMessageDialog(null,"Operação não realizada");
         }
-        
-        preencherTurma();
     }//GEN-LAST:event_jBCadastrarAlunoActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
+        Integer matricula = (Integer.parseInt(tabelaAlunosTurma.getValueAt(tabelaAlunosTurma.getSelectedRow(), 0).toString()));
+        Aluno aluno = controllerAluno.buscarAlunoPorMatricula(matricula);
+        
+        int opcao = JOptionPane.showConfirmDialog(null,"Deseja remover o aluno "+ aluno.getNome()+ " da turma "+ turma.getNome()+" ?");
+        
+        if(opcao == 0){
+            System.out.println("Quantidade Antes:" + aluno.getTurma().getQuantidade().toString());
+            turma.setQuantidade(turma.getQuantidade()-1);
+            controllerTurma.atualizarCadastro(turma);
+            System.out.println("Quantidade Depois:" + aluno.getTurma().getQuantidade().toString());
+            
+            aluno.setTurma(null);
+            controllerAluno.atualizarCadastro(aluno);
+            JOptionPane.showMessageDialog(null,"Aluno removido com sucesso!");
+            
+            preencherTurma();
+            preencherTabelaAlunos(new Aluno());
+        }else{
+            JOptionPane.showMessageDialog(null,"Operação não realizada");
+        }
+    }//GEN-LAST:event_jBRemoverActionPerformed
 
     private void preencherTurma() {
         txtTurmaCodigo.setText(turma.getCodigo().toString());
@@ -435,6 +476,7 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bGPCD;
     private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBCadastrarAluno;
+    private javax.swing.JButton jBRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -118,8 +118,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         bGPCD.add(jRbAmbos);
         jRbAmbos.setText("AMBOS");
 
-        jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FUNDAMENTAL ", "FUNDAMENTAL I", "MEDIO" }));
-        jcbModEnsino.setSelectedIndex(-1);
+        jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "FUNDAMENTAL", "FUNDAMENTAL I", "MEDIO" }));
 
         jBBuscar.setText("BUSCAR");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +265,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
             jRbAmbos.setSelected(true);
         }
         t.setAno(!txtTurmaAno.getText().isEmpty() ? Integer.parseInt(txtTurmaAno.getText()) : null);
-        t.setEnsino(jcbModEnsino.getSelectedIndex() != -1 ? jcbModEnsino.getSelectedItem().toString() : null);
+        t.setEnsino(jcbModEnsino.getSelectedIndex() != 0 ? jcbModEnsino.getSelectedItem().toString() : null);
         listar(t,pcd);
     }//GEN-LAST:event_jBBuscarActionPerformed
 
