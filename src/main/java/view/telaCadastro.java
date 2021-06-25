@@ -5,17 +5,22 @@
  */
 package view;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author savio
  */
-public class telaCadastro extends javax.swing.JInternalFrame{
+public class telaCadastro extends javax.swing.JInternalFrame {   
 
     /**
      * Creates new form telaCadastro
      */
     public telaCadastro() {
-        initComponents();
+        initComponents();        
     }
 
     /**
@@ -83,59 +88,22 @@ public class telaCadastro extends javax.swing.JInternalFrame{
 
     private void jbCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarAlunoActionPerformed
         telaAluno telaA = new telaAluno();
-        this.dispose();
-        //telaPrincipal.desktopPane.add(telaA);
+        telaPrincipal.desktopPane.add(telaA);
         telaA.setVisible(true);
-        
-        
+        this.dispose();
     }//GEN-LAST:event_jbCadastrarAlunoActionPerformed
 
     private void jbCadastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarTurmaActionPerformed
-        telaRelacionar telaR = new telaRelacionar();
+        telaTurma telaT = new telaTurma();
+        telaPrincipal.desktopPane.add(telaT);
+        telaT.setVisible(true);
         this.dispose();
-        //this.desktopPane.add(telaR);
-        telaR.setVisible(true);
-        
+
     }//GEN-LAST:event_jbCadastrarTurmaActionPerformed
 
     private void jBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBButtonActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jBButtonActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(telaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(telaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(telaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(telaCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new telaCadastro().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBButton;

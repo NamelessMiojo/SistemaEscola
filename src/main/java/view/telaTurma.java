@@ -34,7 +34,7 @@ public class telaTurma extends javax.swing.JInternalFrame {
      * Creates new form telaTurma
      */
     public telaTurma() {
-        initComponents();      
+        initComponents();   
         
         this.txtCodigo.setEnabled(false);
         this.txtQuantidade.setEnabled(false);
@@ -264,6 +264,9 @@ public class telaTurma extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
+        telaCadastro telaC = new telaCadastro();
+        telaPrincipal.desktopPane.add(telaC);
+        telaC.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
 

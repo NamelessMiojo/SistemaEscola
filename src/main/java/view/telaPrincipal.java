@@ -14,12 +14,12 @@ import javax.swing.JFrame;
  * @author Arthur
  */
 public class telaPrincipal extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form tela
      */
     public telaPrincipal() {
-        initComponents();
+        initComponents();        
         this.setExtendedState(MAXIMIZED_BOTH);
     }  
        
@@ -35,8 +35,8 @@ public class telaPrincipal extends javax.swing.JFrame {
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        menuTurma = new javax.swing.JMenuItem();
-        menuAluno = new javax.swing.JMenuItem();
+        menuCadastrar = new javax.swing.JMenuItem();
+        menuMatricula = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -46,25 +46,25 @@ public class telaPrincipal extends javax.swing.JFrame {
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu");
 
-        menuTurma.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        menuTurma.setMnemonic('o');
-        menuTurma.setText("Cadastrar");
-        menuTurma.addActionListener(new java.awt.event.ActionListener() {
+        menuCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuCadastrar.setMnemonic('o');
+        menuCadastrar.setText("Cadastrar");
+        menuCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuTurmaActionPerformed(evt);
+                menuCadastrarActionPerformed(evt);
             }
         });
-        fileMenu.add(menuTurma);
+        fileMenu.add(menuCadastrar);
 
-        menuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        menuAluno.setMnemonic('s');
-        menuAluno.setText("Matricula");
-        menuAluno.addActionListener(new java.awt.event.ActionListener() {
+        menuMatricula.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuMatricula.setMnemonic('s');
+        menuMatricula.setText("Matricula");
+        menuMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAlunoActionPerformed(evt);
+                menuMatriculaActionPerformed(evt);
             }
         });
-        fileMenu.add(menuAluno);
+        fileMenu.add(menuMatricula);
 
         menuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuSair.setMnemonic('x');
@@ -107,17 +107,17 @@ public class telaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menuSairActionPerformed
 
-    private void menuTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTurmaActionPerformed
-        telaCadastro tela = new telaCadastro();
-        this.desktopPane.add(tela);        
+    private void menuCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarActionPerformed
+        telaCadastro tela = new telaCadastro();        
+        this.desktopPane.add(tela);       
         tela.setVisible(true);        
-    }//GEN-LAST:event_menuTurmaActionPerformed
+    }//GEN-LAST:event_menuCadastrarActionPerformed
 
-    private void menuAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlunoActionPerformed
+    private void menuMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMatriculaActionPerformed
         telaRelacionar tela = new telaRelacionar();
         this.desktopPane.add(tela);        
         tela.setVisible(true);     
-    }//GEN-LAST:event_menuAlunoActionPerformed
+    }//GEN-LAST:event_menuMatriculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,19 +151,22 @@ public class telaPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new telaPrincipal().setVisible(true);
+                
+                
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JDesktopPane desktopPane;
+    public static javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
-    private javax.swing.JMenuItem menuAluno;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem menuCadastrar;
+    private javax.swing.JMenuItem menuMatricula;
     private javax.swing.JMenuItem menuSair;
-    private javax.swing.JMenuItem menuTurma;
     // End of variables declaration//GEN-END:variables
 
 }

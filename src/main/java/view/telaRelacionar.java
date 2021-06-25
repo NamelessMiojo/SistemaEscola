@@ -28,7 +28,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     public telaRelacionar() {
         initComponents();
         listar(new Turma(),null);
-    }
+    }    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,6 +119,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         jRbAmbos.setText("AMBOS");
 
         jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "FUNDAMENTAL", "FUNDAMENTAL I", "MEDIO" }));
+        jcbModEnsino.setSelectedIndex(-1);
 
         jBBuscar.setText("BUSCAR");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -241,10 +242,10 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
        
        Turma turma = controller.buscarTurmaPorCodigo(codigo);
        
-       telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);
+       telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);              
+       telaPrincipal.desktopPane.add(telaRA);       
+       telaRA.setVisible(true);
        this.dispose();
-       //this.desktopPane.add(telaRA);
-       telaRA.setVisible(true);    
               
     }//GEN-LAST:event_tabelaMouseClicked
 
