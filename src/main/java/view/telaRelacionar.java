@@ -17,6 +17,7 @@ import javax.swing.JInternalFrame;
 import dominio.Turma;
 import enumerator.eModEnsino;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -33,7 +34,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
      */
     public telaRelacionar() {
         initComponents();
-        listar(new Turma(), null);
+        listar(new Turma(), 2);
         eModEnsino mod;
 
         DefaultComboBoxModel cbModel = new DefaultComboBoxModel(eModEnsino.values());
@@ -266,7 +267,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         Turma t = new Turma();
-        Integer pcd = null;
+        Integer pcd = 2;
         t.setCodigo(!txtTurmaCodigo.getText().isEmpty() ? Integer.parseInt(txtTurmaCodigo.getText()) : null);
         t.setNome(!txtTurmaNome.getText().isEmpty() ? txtTurmaNome.getText() : null);
         if (jRBSim.isSelected()) {
@@ -274,7 +275,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         } else if (jRBNao.isSelected()) {
             pcd = 0;
         } else {
-            jRbAmbos.setSelected(true);
+            jRbAmbos.setSelected(true);            
         }
         t.setAno(!txtTurmaAno.getText().isEmpty() ? Integer.parseInt(txtTurmaAno.getText()) : null);
         t.setEnsino(jcbModEnsino.getSelectedIndex() != 0 ? jcbModEnsino.getSelectedItem().toString() : null);
@@ -317,28 +318,57 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     }
 
     public void listar(Turma t, Integer pcd) {
+        List<Turma> novalista = new ArrayList<Turma>();
         try {
-            List<Turma> lista = controller.buscarTurmasFiltrado(t, pcd);
+            List<Turma> lista = controller.buscarTurmasFiltrado(t, pcd);            
             DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
             modelo.setNumRows(0);
 
-            for (Turma turma : lista) {
-                List<Aluno> alunos = controllerAluno.buscarTodosAlunosTurma(turma);
-                for (Aluno a : alunos) {
-                    if (a.getPCD() == (pcd)) {
-                       
-                        break;
+            if (pcd == 1) {
+                for (Turma turma : lista) {
+                    List<Aluno> alunos = controllerAluno.buscarTodosAlunosTurma(turma);
+                    for (Aluno a : alunos) {
+                        if (a.getPCD() == pcd) {
+                            if (!novalista.contains(a.getTurma())) {
+                                novalista.add(a.getTurma());
+                                break;
+                            }
+                        }
+
                     }
                 }
-                 modelo.addRow(new Object[]{
-                            turma.getCodigo(),
-                            turma.getNome(),
-                            turma.getEnsino(),
-                            turma.getAno(),
-                            turma.getQuantidade()
-                        });
 
+            }else if (pcd == 0) {
+                int aux = 0;
+                for (Turma turma : lista) {
+                    List<Aluno> alunos = controllerAluno.buscarTodosAlunosTurma(turma);
+                    for (Aluno a : alunos) {
+                        if (a.getPCD() == 1) {
+                            aux = 1;
+                        }
+
+                    }
+                    if (aux == 0) {
+                        novalista.add(turma);
+
+                    }
+                    aux=0;
+                }
+
+            } else {
+                novalista = lista;
             }
+
+            for (Turma turma : novalista) {
+                modelo.addRow(new Object[]{
+                    turma.getCodigo(),
+                    turma.getNome(),
+                    turma.getEnsino(),
+                    turma.getAno(),
+                    turma.getQuantidade()
+                });
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao Listar" + e);

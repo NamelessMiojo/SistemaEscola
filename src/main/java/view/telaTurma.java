@@ -11,14 +11,12 @@ import dominio.Turma;
 import enumerator.eModEnsino;
 import java.awt.Dimension;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -28,30 +26,27 @@ public class telaTurma extends javax.swing.JInternalFrame {
 
     TurmaController controller = new TurmaController();
     Turma turma = null;
-           
-    
+
     /**
      * Creates new form telaTurma
      */
     public telaTurma() {
-        initComponents();   
-        
+        initComponents();
+
         this.txtCodigo.setEnabled(false);
         this.txtQuantidade.setEnabled(false);
         eModEnsino mod;
         jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel(eModEnsino.values()));
         jcbModEnsino.setSelectedIndex(-1);
     }
-    
+
     public telaTurma(Turma turma) {
-        initComponents();      
+        initComponents();
         this.txtCodigo.setEnabled(false);
         this.txtQuantidade.setEnabled(false);
         this.turma = turma;
         preencherTela();
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -221,6 +216,10 @@ public class telaTurma extends javax.swing.JInternalFrame {
 
         if (turma.getCodigo() > 0) {
             JOptionPane.showMessageDialog(null, "Turma cadastrada com Sucesso!");
+            telaCadastro telaC = new telaCadastro();
+            telaPrincipal.desktopPane.add(telaC);
+            telaC.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar Turma!");
         }
@@ -229,7 +228,7 @@ public class telaTurma extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtualizarActionPerformed
-        
+
         try {
             if (Integer.parseInt(txtAno.getText()) > 0) {
                 JOptionPane.showMessageDialog(null, "Ano de nascimento inválido!");
