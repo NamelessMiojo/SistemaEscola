@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 public class TurmaDao {    
     private static EntityManagerFactory entityManagerFactory = 
-            Persistence.createEntityManagerFactory("sistemaEscola");
+            Persistence.createEntityManagerFactory("sistemaEscolaMySQL");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
     
     
