@@ -234,7 +234,7 @@ public class telaAluno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
-        voltar();
+        this.dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
@@ -280,7 +280,9 @@ public class telaAluno extends javax.swing.JInternalFrame {
 
     private void jBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtualizarActionPerformed
 
-        if (Integer.parseInt(txtAnoNascimento.getText()) > 0) {
+        try {
+            Integer.parseInt(txtAnoNascimento.getText());
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ano de nascimento inválido!");
             return;
         }
@@ -298,7 +300,14 @@ public class telaAluno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Preencha todas as informações.");
             return;
         }
-        //aluno.setTurma(turma);
+        TurmaDao turmadao = new TurmaDao();
+
+        if (txtCodigoturma.getText().isEmpty()) {
+            aluno.setTurma(null);
+        } else {
+            Turma turma = turmadao.buscarTurmaPorCodigo(Integer.parseInt(txtCodigoturma.getText()));
+            aluno.setTurma(turma);
+        }
 
         controller.atualizarCadastro(aluno);
 
@@ -326,6 +335,12 @@ public class telaAluno extends javax.swing.JInternalFrame {
         txtAnoNascimento.setText(aluno.getAnoNascimento().toString());
         txtMatricula.setText(aluno.getMatricula().toString());
         txtNome.setText(aluno.getNome());
+        if (aluno.getPCD() == 0) {
+            jRBNao.setSelected(true);
+        }
+        if (aluno.getPCD() == 1) {
+            jRBSim.setSelected(true);
+        }
 
         if (aluno.getTurma() != null) {
             txtNomeTurma.setText(aluno.getTurma().getNome());
@@ -356,7 +371,7 @@ public class telaAluno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
 
-    public void voltar(){
+    public void voltar() {
         telaCadastro telaC = new telaCadastro();
         telaPrincipal.desktopPane.add(telaC);
         telaC.setVisible(true);

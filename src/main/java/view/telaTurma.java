@@ -14,6 +14,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,9 +36,7 @@ public class telaTurma extends javax.swing.JInternalFrame {
 
         this.txtCodigo.setEnabled(false);
         this.txtQuantidade.setEnabled(false);
-        eModEnsino mod;
-        jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel(eModEnsino.values()));
-        jcbModEnsino.setSelectedIndex(-1);
+        
     }
 
     public telaTurma(Turma turma) {
@@ -45,6 +44,10 @@ public class telaTurma extends javax.swing.JInternalFrame {
         this.txtCodigo.setEnabled(false);
         this.txtQuantidade.setEnabled(false);
         this.turma = turma;
+        eModEnsino mod;
+        DefaultComboBoxModel cbModel = new DefaultComboBoxModel(eModEnsino.values());        
+        jcbModEnsino.setModel(cbModel);
+        jcbModEnsino.setSelectedIndex(-1);
         preencherTela();
     }
 
@@ -263,9 +266,6 @@ public class telaTurma extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
-        telaCadastro telaC = new telaCadastro();
-        telaPrincipal.desktopPane.add(telaC);
-        telaC.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jBvoltarActionPerformed
 
@@ -326,7 +326,8 @@ public class telaTurma extends javax.swing.JInternalFrame {
         txtCodigo.setText(turma.getCodigo().toString());
         txtAno.setText(turma.getAno().toString());
         txtNome.setText(turma.getNome());
-        txtQuantidade.setText(turma.getQuantidade().toString());
-        jcbModEnsino.setSelectedItem(turma.getEnsino());
+        txtQuantidade.setText(turma.getQuantidade().toString());        
+        jcbModEnsino.setSelectedItem(equals(turma.getEnsino()));
+        
     }
 }

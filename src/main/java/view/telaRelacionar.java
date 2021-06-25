@@ -72,6 +72,8 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         jBBuscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtTurmaAno = new javax.swing.JTextField();
+        jbSelecionar = new javax.swing.JButton();
+        jbAtualizar = new javax.swing.JButton();
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,11 +92,6 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
-            }
-        });
-        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tabelaMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tabela);
@@ -191,7 +188,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtTurmaAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jcbModEnsino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,25 +203,46 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
                 .addGap(45, 45, 45))
         );
 
+        jbSelecionar.setText("SELECIONAR TURMA");
+        jbSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSelecionarActionPerformed(evt);
+            }
+        });
+
+        jbAtualizar.setText("ATUALIZAR TURMA");
+        jbAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jbSelecionar)
+                                .addGap(32, 32, 32)
+                                .addComponent(jbAtualizar)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(42, 42, 42)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jBVoltar)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBVoltar)
+                                .addGap(141, 141, 141)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,9 +254,12 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBVoltar)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBVoltar)
+                    .addComponent(jbSelecionar)
+                    .addComponent(jbAtualizar))
                 .addContainerGap())
         );
 
@@ -248,18 +269,6 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
     }//GEN-LAST:event_formWindowOpened
-
-    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        Integer codigo = (Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString()));
-
-        Turma turma = controller.buscarTurmaPorCodigo(codigo);
-
-        telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);
-        telaPrincipal.desktopPane.add(telaRA);
-        telaRA.setVisible(true);
-        this.dispose();
-
-    }//GEN-LAST:event_tabelaMouseClicked
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
         this.dispose();
@@ -281,6 +290,25 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         t.setEnsino(jcbModEnsino.getSelectedIndex() != 0 ? jcbModEnsino.getSelectedItem().toString() : null);
         listar(t, pcd);
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSelecionarActionPerformed
+        Integer codigo = (Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString()));
+        Turma turma = controller.buscarTurmaPorCodigo(codigo);
+        
+        telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);
+        telaPrincipal.desktopPane.add(telaRA);
+        telaRA.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jbSelecionarActionPerformed
+
+    private void jbAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAtualizarActionPerformed
+        Integer codigo = (Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString()));
+        Turma turma = controller.buscarTurmaPorCodigo(codigo);
+        
+        telaTurma telaT = new telaTurma(turma);
+        telaPrincipal.desktopPane.add(telaT);
+        telaT.setVisible(true);
+    }//GEN-LAST:event_jbAtualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -391,6 +419,8 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRBSim;
     private javax.swing.JRadioButton jRbAmbos;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbAtualizar;
+    private javax.swing.JButton jbSelecionar;
     private javax.swing.JComboBox<String> jcbModEnsino;
     private javax.swing.JTable tabela;
     private javax.swing.JTextField txtTurmaAno;

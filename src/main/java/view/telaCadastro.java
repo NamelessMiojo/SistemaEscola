@@ -90,14 +90,14 @@ public class telaCadastro extends javax.swing.JInternalFrame {
         telaAluno telaA = new telaAluno();
         telaPrincipal.desktopPane.add(telaA);
         telaA.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_jbCadastrarAlunoActionPerformed
 
     private void jbCadastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarTurmaActionPerformed
         telaTurma telaT = new telaTurma();
         telaPrincipal.desktopPane.add(telaT);
         telaT.setVisible(true);
-        this.dispose();
+        
 
     }//GEN-LAST:event_jbCadastrarTurmaActionPerformed
 

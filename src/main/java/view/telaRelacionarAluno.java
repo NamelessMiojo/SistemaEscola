@@ -76,6 +76,7 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
         txtTurmaQuantidade = new javax.swing.JTextField();
         jBRemover = new javax.swing.JButton();
         jbVoltar = new javax.swing.JButton();
+        jbAlterar = new javax.swing.JButton();
 
         setTitle("TELA MANUTENÇÃO DA TURMA");
 
@@ -155,11 +156,6 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
             }
         });
         tabelaBuscaAluno.setMaximumSize(new java.awt.Dimension(455, 360));
-        tabelaBuscaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tabelaBuscaAluno);
         if (tabelaBuscaAluno.getColumnModel().getColumnCount() > 0) {
             tabelaBuscaAluno.getColumnModel().getColumn(4).setResizable(false);
@@ -257,6 +253,13 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
             }
         });
 
+        jbAlterar.setText("ALTERAR ALUNO");
+        jbAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAlterarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -291,11 +294,13 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jBRemover)
-                .addGap(100, 100, 100)
+                .addGap(54, 54, 54)
                 .addComponent(jbVoltar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(jBCadastrarAluno)
-                .addGap(169, 169, 169))
+                .addGap(42, 42, 42)
+                .addComponent(jbAlterar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,12 +335,12 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBRemover)
+                    .addComponent(jbVoltar)
                     .addComponent(jBCadastrarAluno)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBRemover)
-                        .addComponent(jbVoltar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jbAlterar))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -406,10 +411,6 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBCadastrarAlunoActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1MouseClicked
-
     private void jBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBRemoverActionPerformed
         Integer matricula = (Integer.parseInt(tabelaAlunosTurma.getValueAt(tabelaAlunosTurma.getSelectedRow(), 0).toString()));
         Aluno aluno = controllerAluno.buscarAlunoPorMatricula(matricula);
@@ -439,6 +440,15 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
         telaR.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jbVoltarActionPerformed
+
+    private void jbAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAlterarActionPerformed
+        Integer matricula = (Integer.parseInt(tabelaBuscaAluno.getValueAt(tabelaBuscaAluno.getSelectedRow(), 0).toString()));
+        Aluno aluno = controllerAluno.buscarAlunoPorMatricula(matricula);
+        
+        telaAluno telaA = new telaAluno(aluno);
+        telaPrincipal.desktopPane.add(telaA);
+        telaA.setVisible(true);        
+    }//GEN-LAST:event_jbAlterarActionPerformed
 
     private void preencherTurma() {
         txtTurmaCodigo.setText(turma.getCodigo().toString());
@@ -513,6 +523,7 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRbAmbos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbAlterar;
     private javax.swing.JButton jbVoltar;
     private javax.swing.JTable tabelaAlunosTurma;
     private javax.swing.JTable tabelaBuscaAluno;
