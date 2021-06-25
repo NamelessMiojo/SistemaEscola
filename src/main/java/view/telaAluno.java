@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
  *
  * @author savio
  */
-public class telaAluno extends javax.swing.JInternalFrame{
-    
+public class telaAluno extends javax.swing.JInternalFrame {
+
     AlunoController controller = new AlunoController();
     Aluno aluno = null;
     JDesktopPane desktop;
-    
+
     /**
      * Creates new form telaAluno
      */
@@ -32,8 +32,8 @@ public class telaAluno extends javax.swing.JInternalFrame{
         //this.setLocationRelativeTo(null);
         this.txtMatricula.setEnabled(false);
         this.txtNomeTurma.setEnabled(false);
-    }    
-   
+    }
+
     public telaAluno(Aluno aluno) {
         initComponents();
         //this.setLocationRelativeTo(null);
@@ -41,7 +41,7 @@ public class telaAluno extends javax.swing.JInternalFrame{
         this.txtMatricula.setEnabled(false);
         this.txtCodigoturma.setEditable(false);
         this.txtNomeTurma.setEditable(false);
-        
+
         preencherTela();
     }
 
@@ -234,78 +234,78 @@ public class telaAluno extends javax.swing.JInternalFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
-        telaCadastro telaC = new telaCadastro();
-        telaPrincipal.desktopPane.add(telaC);
-        telaC.setVisible(true);
-        this.dispose();
+        voltar();
     }//GEN-LAST:event_jBvoltarActionPerformed
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
-        
+
         try {
             Integer.parseInt(txtAnoNascimento.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ano de nascimento inválido!");
             return;
         }
-        
+
         Aluno aluno = new Aluno();
         aluno.setNome(txtNome.getText());
         aluno.setAnoNascimento(Integer.parseInt(txtAnoNascimento.getText()));
-        
-        if(jRBSim.isSelected()){
+
+        if (jRBSim.isSelected()) {
             aluno.setPCD(1);
-        }else if(jRBNao.isSelected()){
+        } else if (jRBNao.isSelected()) {
             aluno.setPCD(0);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Preencha todas as informações.");
             return;
         }
-        
+
         TurmaDao turmadao = new TurmaDao();
-        
-        Turma turma = turmadao.buscarTurmaPorCodigo(Integer.parseInt(txtCodigoturma.getText()));
-        
-        aluno.setTurma(turma);
-        
+
+        if (txtCodigoturma.getText().isEmpty()) {
+            aluno.setTurma(null);
+        } else {
+            Turma turma = turmadao.buscarTurmaPorCodigo(Integer.parseInt(txtCodigoturma.getText()));
+            aluno.setTurma(turma);
+        }
+
         aluno = controller.cadastrarAluno(aluno);
-        
-        if(aluno.getMatricula()!= null){
+
+        if (aluno.getMatricula() != null) {
             JOptionPane.showMessageDialog(null, "Aluno cadastrado com Sucesso!");
-            this.dispose();
-        }else{
+            voltar();
+        } else {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar Aluno!");
         }
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAtualizarActionPerformed
-        
-        if(Integer.parseInt(txtAnoNascimento.getText()) > 0){
+
+        if (Integer.parseInt(txtAnoNascimento.getText()) > 0) {
             JOptionPane.showMessageDialog(null, "Ano de nascimento inválido!");
             return;
         }
-        
+
         Aluno aluno = new Aluno();
         aluno.setMatricula(Integer.parseInt(txtMatricula.getText()));
         aluno.setNome(txtNome.getText());
         aluno.setAnoNascimento(Integer.parseInt(txtAnoNascimento.getText()));
-        
-        if(jRBSim.isSelected()){
+
+        if (jRBSim.isSelected()) {
             aluno.setPCD(1);
-        }else if(jRBNao.isSelected()){
+        } else if (jRBNao.isSelected()) {
             aluno.setPCD(0);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Preencha todas as informações.");
             return;
         }
         //aluno.setTurma(turma);
-        
+
         controller.atualizarCadastro(aluno);
 
-        if(aluno.getMatricula() != null){
+        if (aluno.getMatricula() != null) {
             JOptionPane.showMessageDialog(null, "Aluno atualizado com Sucesso!");
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar Aluno!");
         }
     }//GEN-LAST:event_jBAtualizarActionPerformed
@@ -313,11 +313,11 @@ public class telaAluno extends javax.swing.JInternalFrame{
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
         Aluno aluno = null;
         aluno = controller.removerAluno(Integer.parseInt(txtMatricula.getText()));
-        
-        if(aluno != null){
+
+        if (aluno != null) {
             JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");
         }
     }//GEN-LAST:event_jBExcluirActionPerformed
@@ -326,8 +326,8 @@ public class telaAluno extends javax.swing.JInternalFrame{
         txtAnoNascimento.setText(aluno.getAnoNascimento().toString());
         txtMatricula.setText(aluno.getMatricula().toString());
         txtNome.setText(aluno.getNome());
-        
-        if(aluno.getTurma() != null){
+
+        if (aluno.getTurma() != null) {
             txtNomeTurma.setText(aluno.getTurma().getNome());
             txtCodigoturma.setText(aluno.getTurma().getCodigo().toString());
         }
@@ -356,5 +356,10 @@ public class telaAluno extends javax.swing.JInternalFrame{
     private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
 
-    
+    public void voltar(){
+        telaCadastro telaC = new telaCadastro();
+        telaPrincipal.desktopPane.add(telaC);
+        telaC.setVisible(true);
+        this.dispose();
+    }
 }

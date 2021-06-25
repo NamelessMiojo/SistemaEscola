@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author savio
  */
-public class telaRelacionarAluno extends javax.swing.JFrame {
+public class telaRelacionarAluno extends javax.swing.JInternalFrame {
     Turma turma;
     AlunoController controllerAluno = new AlunoController();
     TurmaController controllerTurma = new TurmaController();
@@ -75,6 +75,7 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtTurmaQuantidade = new javax.swing.JTextField();
         jBRemover = new javax.swing.JButton();
+        jbVoltar = new javax.swing.JButton();
 
         setTitle("TELA MANUTENÇÃO DA TURMA");
 
@@ -227,8 +228,8 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(213, 213, 213))
         );
 
         jLabel9.setText("ALUNOS DA TURMA");
@@ -246,6 +247,13 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         jBRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBRemoverActionPerformed(evt);
+            }
+        });
+
+        jbVoltar.setText("VOLTAR");
+        jbVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbVoltarActionPerformed(evt);
             }
         });
 
@@ -283,6 +291,8 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jBRemover)
+                .addGap(100, 100, 100)
+                .addComponent(jbVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBCadastrarAluno)
                 .addGap(169, 169, 169))
@@ -293,8 +303,8 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtTurmaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -317,13 +327,15 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jBCadastrarAluno)
-                    .addComponent(jBRemover))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBRemover)
+                        .addComponent(jbVoltar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -421,6 +433,13 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBRemoverActionPerformed
 
+    private void jbVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbVoltarActionPerformed
+        telaRelacionar telaR = new telaRelacionar();
+        telaPrincipal.desktopPane.add(telaR);
+        telaR.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jbVoltarActionPerformed
+
     private void preencherTurma() {
         txtTurmaCodigo.setText(turma.getCodigo().toString());
         txtTurmaAno.setText(turma.getAno().toString());
@@ -494,6 +513,7 @@ public class telaRelacionarAluno extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRbAmbos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbVoltar;
     private javax.swing.JTable tabelaAlunosTurma;
     private javax.swing.JTable tabelaBuscaAluno;
     private javax.swing.JTextField txtAlunoAno;

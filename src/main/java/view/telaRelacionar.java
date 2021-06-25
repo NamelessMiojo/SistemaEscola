@@ -5,7 +5,9 @@
  */
 package view;
 
+import controller.AlunoController;
 import controller.TurmaController;
+import dominio.Aluno;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -13,6 +15,9 @@ import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 
 import dominio.Turma;
+import enumerator.eModEnsino;
+import java.awt.Component;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -21,14 +26,21 @@ import dominio.Turma;
 public class telaRelacionar extends javax.swing.JInternalFrame {
 
     TurmaController controller = new TurmaController();
-    
+    AlunoController controllerAluno = new AlunoController();
+
     /**
      * Creates new form telaRelacionar
      */
     public telaRelacionar() {
         initComponents();
-        listar(new Turma(),null);
-    }    
+        listar(new Turma(), null);
+        eModEnsino mod;
+
+        DefaultComboBoxModel cbModel = new DefaultComboBoxModel(eModEnsino.values());
+        cbModel.insertElementAt("TODOS", 0);
+        jcbModEnsino.setModel(cbModel);
+        jcbModEnsino.setSelectedIndex(-1);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,7 +131,6 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         jRbAmbos.setText("AMBOS");
 
         jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "FUNDAMENTAL", "FUNDAMENTAL I", "MEDIO" }));
-        jcbModEnsino.setSelectedIndex(-1);
 
         jBBuscar.setText("BUSCAR");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -234,23 +245,23 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-       Integer codigo = (Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString()));
-       
-       Turma turma = controller.buscarTurmaPorCodigo(codigo);
-       
-       telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);              
-       telaPrincipal.desktopPane.add(telaRA);       
-       telaRA.setVisible(true);
-       this.dispose();
-              
+        Integer codigo = (Integer.parseInt(tabela.getValueAt(tabela.getSelectedRow(), 0).toString()));
+
+        Turma turma = controller.buscarTurmaPorCodigo(codigo);
+
+        telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);
+        telaPrincipal.desktopPane.add(telaRA);
+        telaRA.setVisible(true);
+        this.dispose();
+
     }//GEN-LAST:event_tabelaMouseClicked
 
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jBVoltarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
@@ -258,16 +269,16 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         Integer pcd = null;
         t.setCodigo(!txtTurmaCodigo.getText().isEmpty() ? Integer.parseInt(txtTurmaCodigo.getText()) : null);
         t.setNome(!txtTurmaNome.getText().isEmpty() ? txtTurmaNome.getText() : null);
-        if(jRBSim.isSelected()){
+        if (jRBSim.isSelected()) {
             pcd = 1;
-        }else if(jRBNao.isSelected()){
+        } else if (jRBNao.isSelected()) {
             pcd = 0;
-        }else{
+        } else {
             jRbAmbos.setSelected(true);
         }
         t.setAno(!txtTurmaAno.getText().isEmpty() ? Integer.parseInt(txtTurmaAno.getText()) : null);
         t.setEnsino(jcbModEnsino.getSelectedIndex() != 0 ? jcbModEnsino.getSelectedItem().toString() : null);
-        listar(t,pcd);
+        listar(t, pcd);
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     /**
@@ -304,25 +315,33 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
             }
         });
     }
-    
-    public void listar(Turma t, Integer pcd){
+
+    public void listar(Turma t, Integer pcd) {
         try {
-            List<Turma> lista = controller.buscarTurmasFiltrado(t,pcd);
-            DefaultTableModel modelo=(DefaultTableModel)tabela.getModel();
+            List<Turma> lista = controller.buscarTurmasFiltrado(t, pcd);
+            DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
             modelo.setNumRows(0);
-            
-            for(Turma turma: lista){
-                modelo.addRow(new Object[]{
-                    turma.getCodigo(),
-                    turma.getNome(),
-                    turma.getEnsino(),
-                    turma.getAno(),
-                    turma.getQuantidade()
-                });
+
+            for (Turma turma : lista) {
+                List<Aluno> alunos = controllerAluno.buscarTodosAlunosTurma(turma);
+                for (Aluno a : alunos) {
+                    if (a.getPCD() == (pcd)) {
+                       
+                        break;
+                    }
+                }
+                 modelo.addRow(new Object[]{
+                            turma.getCodigo(),
+                            turma.getNome(),
+                            turma.getEnsino(),
+                            turma.getAno(),
+                            turma.getQuantidade()
+                        });
+
             }
         } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null,"Erro ao Listar"+e);
+            JOptionPane.showMessageDialog(null, "Erro ao Listar" + e);
         }
     }
 

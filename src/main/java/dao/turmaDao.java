@@ -75,9 +75,9 @@ public class TurmaDao {
             sql = sql.concat(" and t.ensino = :ensino");
         }
         
-        if(pcd != null){
+        /*if(pcd != null){
             sql = sql.concat(" and (a.turma = :turma and a.PCD in (:pcd))");
-        }
+        }*/
         
         Query query = entityManager.createQuery(sql, Turma.class);
         
@@ -97,10 +97,10 @@ public class TurmaDao {
             query.setParameter("ensino", t.getEnsino());
         }
         
-        if(pcd != null){
+        /*if(pcd != null){
             query.setParameter("turma", t);
             query.setParameter("pcd", pcd);
-        }
+        }*/
         
         
         return query.getResultList();
