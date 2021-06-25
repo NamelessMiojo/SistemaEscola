@@ -6,6 +6,7 @@
 package controller;
 
 import dao.TurmaDao;
+import dominio.Aluno;
 import dominio.Turma;
 import java.util.List;
 
@@ -35,5 +36,9 @@ public class TurmaController {
     
     public List<Turma> buscarTodasTurma(){
         return dao.buscarTodasTurma();
+    }
+    
+    public List<Turma> buscarTurmasFiltrado(Turma t, Integer pcd){
+        return dao.buscarTurmasFiltrado(t, pcd);
     }
 }

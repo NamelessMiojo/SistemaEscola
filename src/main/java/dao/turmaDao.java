@@ -5,7 +5,6 @@
  */
 package dao;
 
-import dominio.Aluno;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -53,6 +52,56 @@ public class TurmaDao {
         String sql = "Select t From Turma t";
         
         Query query = entityManager.createQuery(sql,Turma.class);
+        
+        return query.getResultList();
+    }
+    
+    public List<Turma> buscarTurmasFiltrado(Turma t, Integer pcd){
+        String sql = "Select distinct t From Turma t, Aluno a where 1 = 1";
+        
+        if(t.getCodigo()!= null){
+            sql = sql.concat(" and t.codigo = :codigo");
+        }
+        
+        if(t.getNome()!= null){
+            sql = sql.concat(" and t.nome = :nome");
+        }
+        
+        if(t.getAno()!= null){
+            sql = sql.concat(" and t.ano = :ano");
+        }
+        
+        if(t.getEnsino()!= null){
+            sql = sql.concat(" and t.ensino = :ensino");
+        }
+        
+        if(pcd != null){
+            sql = sql.concat(" and (a.turma = :turma and a.PCD in (:pcd))");
+        }
+        
+        Query query = entityManager.createQuery(sql, Turma.class);
+        
+        if(t.getCodigo() != null){
+            query.setParameter("codigo", t.getCodigo());
+        }
+        
+        if(t.getNome()!= null){
+            query.setParameter("nome", t.getNome());
+        }
+        
+        if(t.getAno()!= null){
+            query.setParameter("ano", t.getAno());
+        }
+        
+        if(t.getEnsino()!= null){
+            query.setParameter("ensino", t.getEnsino());
+        }
+        
+        if(pcd != null){
+            query.setParameter("turma", t);
+            query.setParameter("pcd", pcd);
+        }
+        
         
         return query.getResultList();
     }

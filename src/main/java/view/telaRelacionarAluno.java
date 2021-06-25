@@ -5,14 +5,22 @@
  */
 package view;
 
+import controller.AlunoController;
+import controller.TurmaController;
 import dominio.Turma;
+import dominio.Aluno;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author savio
  */
-public class telaRelacionarAluno extends javax.swing.JInternalFrame {
-
+public class telaRelacionarAluno extends javax.swing.JFrame {
+    Turma turma;
+    AlunoController controllerAluno = new AlunoController();
+    TurmaController controllerTurma = new TurmaController();
     /**
      * Creates new form telaRelacionarAluno
      */
@@ -20,8 +28,11 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
         initComponents();
     }
     
-    public telaRelacionarAluno(Turma turma) {
+    public telaRelacionarAluno(Turma t) {
         initComponents();
+        turma = t;
+        preencherTurma();
+        preencherTabelaAlunos(new Aluno());
     }
 
     /**
@@ -38,13 +49,13 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
         txtTurmaNome = new javax.swing.JTextField();
         txtTurmaCodigo = new javax.swing.JTextField();
         txtTurmaAno = new javax.swing.JTextField();
+        txtTurmaEnsino = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        txtTurmaEnsino = new javax.swing.JTextField();
+        tabelaAlunosTurma = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jRBSim = new javax.swing.JRadioButton();
         txtAlunoMatricula = new javax.swing.JTextField();
@@ -57,11 +68,14 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jBBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tabelaBuscaAluno = new javax.swing.JTable();
+        jRbAmbos = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
+        jBCadastrarAluno = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtTurmaQuantidade = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TELA MANUTENÇÃO DA TURMA");
 
         jLabel4.setText("ANO:");
 
@@ -75,7 +89,7 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TELA MANUTENÇÃO DA TURMA");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaAlunosTurma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -94,7 +108,7 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabelaAlunosTurma);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("BUSCAR ALUNO"));
 
@@ -119,7 +133,7 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaBuscaAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -138,61 +152,55 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaBuscaAluno.setMaximumSize(new java.awt.Dimension(455, 360));
+        tabelaBuscaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setHeaderValue("TURMA");
+        jScrollPane1.setViewportView(tabelaBuscaAluno);
+        if (tabelaBuscaAluno.getColumnModel().getColumnCount() > 0) {
+            tabelaBuscaAluno.getColumnModel().getColumn(4).setResizable(false);
+            tabelaBuscaAluno.getColumnModel().getColumn(4).setHeaderValue("TURMA");
         }
 
-        jButton1.setText("ADICIONAR ALUNO A TURMA");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        bGPCD.add(jRbAmbos);
+        jRbAmbos.setText("AMBOS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel5)
+                        .addGap(53, 53, 53)
+                        .addComponent(txtAlunoMatricula))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(82, 82, 82)
+                        .addComponent(txtAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBBuscar)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(53, 53, 53)
-                                .addComponent(txtAlunoMatricula))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(82, 82, 82)
-                                .addComponent(txtAlunoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
+                                .addComponent(jRBSim)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jBBuscar)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRBSim)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jRBNao))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(jRBNao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtAlunoAno, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jRbAmbos))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jButton1)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAlunoAno, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,17 +221,25 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jRBSim)
-                    .addComponent(jRBNao))
+                    .addComponent(jRBNao)
+                    .addComponent(jRbAmbos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(39, 39, 39))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
 
         jLabel9.setText("ALUNOS DA TURMA");
+
+        jBCadastrarAluno.setText("ADICIONAR ALUNO A TURMA");
+        jBCadastrarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCadastrarAlunoActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("QUANTIDADE:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -231,27 +247,35 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel4))
                         .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTurmaAno, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(txtTurmaNome)
-                            .addComponent(txtTurmaCodigo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTurmaEnsino))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTurmaNome, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                            .addComponent(txtTurmaCodigo)
+                            .addComponent(txtTurmaAno)))
                     .addComponent(jLabel9)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTurmaEnsino)
+                            .addComponent(txtTurmaQuantidade))))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 854, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBCadastrarAluno)
+                .addGap(169, 169, 169))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,81 +288,155 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtTurmaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtTurmaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtTurmaAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(txtTurmaEnsino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(txtTurmaQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBCadastrarAluno)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        // TODO add your handling code here:
+        Aluno a = new Aluno();
+        a.setMatricula(!txtAlunoMatricula.getText().isEmpty() ? Integer.parseInt(txtAlunoMatricula.getText()) : null);
+        a.setNome(!txtAlunoNome.getText().isEmpty() ? txtAlunoNome.getText() : null);
+        if(jRBSim.isSelected()){
+            a.setPCD(1);
+        }else if(jRBNao.isSelected()){
+            a.setPCD(0);
+        }else{
+            jRbAmbos.setSelected(true);
+        }
+        a.setAnoNascimento(!txtAlunoAno.getText().isEmpty() ? Integer.parseInt(txtAlunoAno.getText()) : null);
+        preencherTabelaAlunos(a);
     }//GEN-LAST:event_jBBuscarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarAlunoActionPerformed
+        Integer matricula = (Integer.parseInt(tabelaBuscaAluno.getValueAt(tabelaBuscaAluno.getSelectedRow(), 0).toString()));
+        Aluno aluno = controllerAluno.buscarAlunoPorMatricula(matricula);
+        
+        if(aluno.getTurma() == null){
+            //Alterando quantidade turma
+            turma.setQuantidade(turma.getQuantidade()+1);
+            controllerTurma.atualizarCadastro(turma);
+                
+            //Alterando turma do aluno
+            aluno.setTurma(turma);
+            controllerAluno.atualizarCadastro(aluno);
+            
+            return;
+        }
+        
+        if(aluno.getTurma().getCodigo().equals(turma.getCodigo())){
+            JOptionPane.showMessageDialog(null,"Aluno já cadastrado nessa turma");
+            return;
+        }
+        
+        if(aluno.getTurma().getCodigo() != null){
+            int opcao = JOptionPane.showConfirmDialog(null,"Aluno já cadastrado na turma "+ turma.getNome()+ ". Deseja cadastrar nessa nova turma?");
+            
+            if(opcao == 0){
+                //Alterando quantidade turma antiga
+                aluno.getTurma().setQuantidade(aluno.getTurma().getQuantidade()-1);
+                controllerTurma.atualizarCadastro(aluno.getTurma());
+                
+                //Alterando quantidade turma nova
+                turma.setQuantidade(turma.getQuantidade()+1);
+                controllerTurma.atualizarCadastro(turma);
+                
+                //Alterando turma do aluno
+                aluno.setTurma(turma);
+                controllerAluno.atualizarCadastro(aluno);
+            }
+            
+            return;
+        }
+        
+        preencherTurma();
+    }//GEN-LAST:event_jBCadastrarAlunoActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void preencherTurma() {
+        txtTurmaCodigo.setText(turma.getCodigo().toString());
+        txtTurmaAno.setText(turma.getAno().toString());
+        txtTurmaEnsino.setText(turma.getEnsino());
+        txtTurmaNome.setText(turma.getNome());
+        txtTurmaQuantidade.setText(turma.getQuantidade().toString());
+        
+        preencherTabelaAlunosTurma();
+    }
+    
+     public void preencherTabelaAlunosTurma(){
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            List<Aluno> lista = controllerAluno.buscarTodosAlunosTurma(turma);
+            DefaultTableModel modelo=(DefaultTableModel)tabelaAlunosTurma.getModel();
+            modelo.setNumRows(0);
+            
+            for(Aluno aluno: lista){
+                modelo.addRow(new Object[]{
+                    aluno.getMatricula(),
+                    aluno.getNome(),
+                    aluno.getAnoNascimento(),
+                    aluno.getPCD() == 1 ? "Sim" : "Não"
+                });
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(telaRelacionarAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(telaRelacionarAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(telaRelacionarAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(telaRelacionarAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Erro ao Listar"+e);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new telaRelacionarAluno().setVisible(true);
+    }
+    
+    public void preencherTabelaAlunos(Aluno a){
+        try {
+            List<Aluno> lista = controllerAluno.buscarAlunosFiltrado(a);
+            DefaultTableModel modelo=(DefaultTableModel)tabelaBuscaAluno.getModel();
+            modelo.setNumRows(0);
+            
+            for(Aluno aluno: lista){
+                modelo.addRow(new Object[]{
+                    aluno.getMatricula(),
+                    aluno.getNome(),
+                    aluno.getAnoNascimento(),
+                    aluno.getPCD() == 1 ? "Sim" : "Não",
+                    aluno.getTurma() != null ? aluno.getTurma().getNome(): ""
+                });
             }
-        });
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Erro ao Listar"+e);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGPCD;
     private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBCadastrarAluno;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -351,10 +449,11 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRBNao;
     private javax.swing.JRadioButton jRBSim;
+    private javax.swing.JRadioButton jRbAmbos;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tabelaAlunosTurma;
+    private javax.swing.JTable tabelaBuscaAluno;
     private javax.swing.JTextField txtAlunoAno;
     private javax.swing.JTextField txtAlunoMatricula;
     private javax.swing.JTextField txtAlunoNome;
@@ -362,5 +461,6 @@ public class telaRelacionarAluno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTurmaCodigo;
     private javax.swing.JTextField txtTurmaEnsino;
     private javax.swing.JTextField txtTurmaNome;
+    private javax.swing.JTextField txtTurmaQuantidade;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,6 +27,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
      */
     public telaRelacionar() {
         initComponents();
+        listar(new Turma(),null);
     }
 
     /**
@@ -38,11 +39,26 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bGPCD = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jBVoltar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtTurmaCodigo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtTurmaNome = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jRBSim = new javax.swing.JRadioButton();
+        jRBNao = new javax.swing.JRadioButton();
+        jRbAmbos = new javax.swing.JRadioButton();
+        jcbModEnsino = new javax.swing.JComboBox<>();
+        jBBuscar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtTurmaAno = new javax.swing.JTextField();
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,6 +99,101 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
             }
         });
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Turma"));
+
+        jLabel3.setText("CÓDIGO: ");
+
+        jLabel4.setText("NOME:");
+
+        jLabel11.setText("MODELO DE ENSINO:");
+
+        jLabel8.setText("ALUNO COM DEFICIÊNCIA:");
+
+        bGPCD.add(jRBSim);
+        jRBSim.setText("SIM");
+
+        bGPCD.add(jRBNao);
+        jRBNao.setText("NÃO");
+
+        bGPCD.add(jRbAmbos);
+        jRbAmbos.setText("AMBOS");
+
+        jcbModEnsino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FUNDAMENTAL ", "FUNDAMENTAL I", "MEDIO" }));
+        jcbModEnsino.setSelectedIndex(-1);
+
+        jBBuscar.setText("BUSCAR");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("ANO:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRBSim)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRBNao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRbAmbos))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTurmaCodigo)
+                                    .addComponent(txtTurmaNome)
+                                    .addComponent(jcbModEnsino, 0, 217, Short.MAX_VALUE)
+                                    .addComponent(txtTurmaAno)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jBBuscar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTurmaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtTurmaNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtTurmaAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jcbModEnsino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jRBSim)
+                    .addComponent(jRBNao)
+                    .addComponent(jRbAmbos))
+                .addGap(18, 18, 18)
+                .addComponent(jBBuscar)
+                .addGap(45, 45, 45))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,12 +204,15 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(jBVoltar)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,8 +222,10 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBVoltar)
                 .addContainerGap())
         );
@@ -118,7 +234,7 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        listar();
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
@@ -136,6 +252,23 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
     private void jBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVoltarActionPerformed
        this.dispose();
     }//GEN-LAST:event_jBVoltarActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        Turma t = new Turma();
+        Integer pcd = null;
+        t.setCodigo(!txtTurmaCodigo.getText().isEmpty() ? Integer.parseInt(txtTurmaCodigo.getText()) : null);
+        t.setNome(!txtTurmaNome.getText().isEmpty() ? txtTurmaNome.getText() : null);
+        if(jRBSim.isSelected()){
+            pcd = 1;
+        }else if(jRBNao.isSelected()){
+            pcd = 0;
+        }else{
+            jRbAmbos.setSelected(true);
+        }
+        t.setAno(!txtTurmaAno.getText().isEmpty() ? Integer.parseInt(txtTurmaAno.getText()) : null);
+        t.setEnsino(jcbModEnsino.getSelectedIndex() != -1 ? jcbModEnsino.getSelectedItem().toString() : null);
+        listar(t,pcd);
+    }//GEN-LAST:event_jBBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,9 +305,9 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
         });
     }
     
-public void listar(){
+    public void listar(Turma t, Integer pcd){
         try {
-            List<Turma> lista = controller.buscarTodasTurma();
+            List<Turma> lista = controller.buscarTurmasFiltrado(t,pcd);
             DefaultTableModel modelo=(DefaultTableModel)tabela.getModel();
             modelo.setNumRows(0);
             
@@ -194,10 +327,25 @@ public void listar(){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bGPCD;
+    private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jBVoltar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRBNao;
+    private javax.swing.JRadioButton jRBSim;
+    private javax.swing.JRadioButton jRbAmbos;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> jcbModEnsino;
     private javax.swing.JTable tabela;
+    private javax.swing.JTextField txtTurmaAno;
+    private javax.swing.JTextField txtTurmaCodigo;
+    private javax.swing.JTextField txtTurmaNome;
     // End of variables declaration//GEN-END:variables
 }

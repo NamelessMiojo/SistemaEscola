@@ -29,8 +29,9 @@ public class telaCadastro extends javax.swing.JInternalFrame{
 
         jbCadastrarAluno = new javax.swing.JButton();
         jbCadastrarTurma = new javax.swing.JButton();
+        jBButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jbCadastrarAluno.setText("CADASTRAR ALUNO");
         jbCadastrarAluno.addActionListener(new java.awt.event.ActionListener() {
@@ -46,25 +47,35 @@ public class telaCadastro extends javax.swing.JInternalFrame{
             }
         });
 
+        jBButton.setText("VOLTAR");
+        jBButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(138, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbCadastrarTurma)
-                    .addComponent(jbCadastrarAluno))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jbCadastrarTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbCadastrarAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap(91, Short.MAX_VALUE)
                 .addComponent(jbCadastrarAluno)
-                .addGap(54, 54, 54)
+                .addGap(44, 44, 44)
                 .addComponent(jbCadastrarTurma)
-                .addGap(96, 96, 96))
+                .addGap(42, 42, 42)
+                .addComponent(jBButton)
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -86,6 +97,10 @@ public class telaCadastro extends javax.swing.JInternalFrame{
         telaR.setVisible(true);
         
     }//GEN-LAST:event_jbCadastrarTurmaActionPerformed
+
+    private void jBButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBButtonActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jBButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,6 +138,7 @@ public class telaCadastro extends javax.swing.JInternalFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBButton;
     private javax.swing.JButton jbCadastrarAluno;
     private javax.swing.JButton jbCadastrarTurma;
     // End of variables declaration//GEN-END:variables

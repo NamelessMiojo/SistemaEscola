@@ -21,9 +21,6 @@ public class telaPrincipal extends javax.swing.JFrame {
     public telaPrincipal() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        telaCadastro telaC = new telaCadastro();
-        this.desktopPane.add(telaC);
-        telaC.setVisible(true);        
     }  
        
     /**
