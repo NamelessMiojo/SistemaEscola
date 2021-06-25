@@ -30,7 +30,7 @@ public class Turma implements Serializable{
     @Id
     @Column(name = "TUR_CODIGO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigo;
+    private Integer codigo;
     
     @Column(name = "TUR_NOME")
     private String nome;
@@ -39,10 +39,10 @@ public class Turma implements Serializable{
     private String ensino;
     
     @Column(name = "TUR_ANO")
-    private int ano;
+    private Integer ano;
     
     @Column(name = "TUR_QUANTIDADE")
-    private int quantidade;
+    private Integer quantidade;
     
 
 }

@@ -256,7 +256,6 @@ public class telaAluno extends javax.swing.JInternalFrame {
             return;
         }
         
-        //aluno.setTurma(turma);
         TurmaDao turmadao = new TurmaDao();
         
         Turma turma = turmadao.buscarTurmaPorCodigo(Integer.parseInt(txtCodigoturma.getText()));

@@ -50,10 +50,12 @@ public class TurmaDao {
     }
     
     public List<Turma> buscarTodasTurma(){
-        String sql = "From Turma";
+        String sql = "Select t From Turma t";
         
-        Query query = entityManager.createQuery(sql);
+        Query query = entityManager.createQuery(sql,Turma.class);
         
         return query.getResultList();
     }
+    
+    
 }

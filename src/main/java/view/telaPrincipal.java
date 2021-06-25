@@ -49,9 +49,9 @@ public class telaPrincipal extends javax.swing.JFrame {
         fileMenu.setMnemonic('f');
         fileMenu.setText("Menu");
 
-        menuTurma.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuTurma.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuTurma.setMnemonic('o');
-        menuTurma.setText("Turmas");
+        menuTurma.setText("Cadastrar");
         menuTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuTurmaActionPerformed(evt);
@@ -59,9 +59,9 @@ public class telaPrincipal extends javax.swing.JFrame {
         });
         fileMenu.add(menuTurma);
 
-        menuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        menuAluno.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         menuAluno.setMnemonic('s');
-        menuAluno.setText("Alunos");
+        menuAluno.setText("Matricula");
         menuAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuAlunoActionPerformed(evt);
@@ -111,15 +111,15 @@ public class telaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuSairActionPerformed
 
     private void menuTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTurmaActionPerformed
-        telaTurma telaT = new telaTurma();
-        this.desktopPane.add(telaT);        
-        telaT.setVisible(true);        
+        telaCadastro tela = new telaCadastro();
+        this.desktopPane.add(tela);        
+        tela.setVisible(true);        
     }//GEN-LAST:event_menuTurmaActionPerformed
 
     private void menuAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlunoActionPerformed
-        telaAluno telaA = new telaAluno();
-        this.desktopPane.add(telaA);        
-        telaA.setVisible(true);     
+        telaRelacionar tela = new telaRelacionar();
+        this.desktopPane.add(tela);        
+        tela.setVisible(true);     
     }//GEN-LAST:event_menuAlunoActionPerformed
 
     /**

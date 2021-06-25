@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -30,7 +31,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "ALUNO")
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString
 public class Aluno implements Serializable{
     
     @Id
@@ -42,10 +43,10 @@ public class Aluno implements Serializable{
     private String nome;
     
     @Column(name = "ALU_ANO_NASCIMENTO")
-    private int anoNascimento;
+    private Integer anoNascimento;
     
     @Column(name = "ALU_PCD")
-    private int PCD;
+    private Integer PCD;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_TURMA_TUR_CODIGO")

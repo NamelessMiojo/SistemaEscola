@@ -7,6 +7,8 @@ package controller;
 
 import dao.AlunoDao;
 import dominio.Aluno;
+import dominio.Turma;
+import java.util.List;
 
 /**
  *
@@ -32,5 +34,15 @@ public class AlunoController {
         return dao.buscarAlunoPorMatricula(matricula);
     }
     
+    public List<Aluno> buscarTodosAlunosTurma(Turma t){
+        return dao.buscarTodosAlunosTurma(t);
+    }
     
+    public List<Aluno> buscarTodosAlunos(){
+        return dao.buscarTodosAlunos();
+    }
+    
+    public List<Aluno> buscarAlunosFiltrado(Aluno a){
+        return dao.buscarAlunosFiltrado(a);
+    }
 }
