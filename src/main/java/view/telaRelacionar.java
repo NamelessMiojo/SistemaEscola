@@ -134,7 +134,8 @@ public class telaRelacionar extends javax.swing.JInternalFrame {
        Turma turma = controller.buscarTurmaPorCodigo(codigo);
        
        telaRelacionarAluno telaRA = new telaRelacionarAluno(turma);
-       this.desktopPane.add(telaRA);
+       this.dispose();
+       //this.desktopPane.add(telaRA);
        telaRA.setVisible(true);    
               
     }//GEN-LAST:event_tabelaMouseClicked

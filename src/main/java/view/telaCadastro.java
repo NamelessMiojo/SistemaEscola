@@ -72,7 +72,8 @@ public class telaCadastro extends javax.swing.JInternalFrame{
 
     private void jbCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarAlunoActionPerformed
         telaAluno telaA = new telaAluno();
-        this.desktopPane.add(telaA);
+        this.dispose();
+        //telaPrincipal.desktopPane.add(telaA);
         telaA.setVisible(true);
         
         
@@ -80,7 +81,8 @@ public class telaCadastro extends javax.swing.JInternalFrame{
 
     private void jbCadastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarTurmaActionPerformed
         telaRelacionar telaR = new telaRelacionar();
-        this.desktopPane.add(telaR);
+        this.dispose();
+        //this.desktopPane.add(telaR);
         telaR.setVisible(true);
         
     }//GEN-LAST:event_jbCadastrarTurmaActionPerformed
