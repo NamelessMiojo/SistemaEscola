@@ -36,7 +36,7 @@ public class telaTurma extends javax.swing.JInternalFrame {
 
         this.txtCodigo.setEnabled(false);
         this.txtQuantidade.setEnabled(false);
-        
+
     }
 
     public telaTurma(Turma turma) {
@@ -45,7 +45,7 @@ public class telaTurma extends javax.swing.JInternalFrame {
         this.txtQuantidade.setEnabled(false);
         this.turma = turma;
         eModEnsino mod;
-        DefaultComboBoxModel cbModel = new DefaultComboBoxModel(eModEnsino.values());        
+        DefaultComboBoxModel cbModel = new DefaultComboBoxModel(eModEnsino.values());
         jcbModEnsino.setModel(cbModel);
         jcbModEnsino.setSelectedIndex(-1);
         preencherTela();
@@ -254,15 +254,26 @@ public class telaTurma extends javax.swing.JInternalFrame {
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
         Turma turma = null;
-        turma = controller.removerTurma(Integer.parseInt(txtCodigo.getText()));
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja remover a turma " + turma.getNome() + " ?");
+        try {
+            if (opcao == 0) {
+                turma = controller.removerTurma(Integer.parseInt(txtCodigo.getText()));
 
-        if (turma != null) {
-            JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
+                if (turma != null) {
+                    JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
 
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Operação não realizada");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Existem alunos na turma");
         }
+
+
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jBvoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBvoltarActionPerformed
@@ -326,8 +337,19 @@ public class telaTurma extends javax.swing.JInternalFrame {
         txtCodigo.setText(turma.getCodigo().toString());
         txtAno.setText(turma.getAno().toString());
         txtNome.setText(turma.getNome());
-        txtQuantidade.setText(turma.getQuantidade().toString());        
-        jcbModEnsino.setSelectedItem(equals(turma.getEnsino()));
-        
+        txtQuantidade.setText(turma.getQuantidade().toString());
+        String ensino = turma.getEnsino();
+        switch (ensino) {
+            case "FUNDAMENTAL":
+                jcbModEnsino.setSelectedIndex(0);
+                break;
+            case "FUNDAMENTAL I":
+                jcbModEnsino.setSelectedIndex(1);
+                break;
+            case "MEDIO":
+                jcbModEnsino.setSelectedIndex(2);
+                break;
+        }
+
     }
 }
