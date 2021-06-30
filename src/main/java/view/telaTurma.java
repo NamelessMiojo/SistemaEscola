@@ -254,7 +254,7 @@ public class telaTurma extends javax.swing.JInternalFrame {
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
         Turma turma = null;
-        int opcao = JOptionPane.showConfirmDialog(null, "Deseja remover a turma " + turma.getNome() + " ?");
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja remover a turma " + txtNome.getText() + " ?");
         try {
             if (opcao == 0) {
                 turma = controller.removerTurma(Integer.parseInt(txtCodigo.getText()));

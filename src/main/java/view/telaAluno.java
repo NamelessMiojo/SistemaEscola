@@ -322,14 +322,23 @@ public class telaAluno extends javax.swing.JInternalFrame {
 
     private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
         Aluno aluno = null;
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja remover o(a) aluno(a) " + txtNome.getText()+ " ?");
         aluno = controller.removerAluno(Integer.parseInt(txtMatricula.getText()));
-
-        if (aluno != null) {
-            JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");
+        try {
+            if (opcao == 0) {
+                if (aluno != null) {
+                    JOptionPane.showMessageDialog(null, "Registro excluído com Sucesso!");
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro ao excluir Registro!");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Operação não realizada");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Existem alunos na turma");
         }
+        
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void preencherTela() {
