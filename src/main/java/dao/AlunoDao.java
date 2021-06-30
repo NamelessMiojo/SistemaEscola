@@ -20,7 +20,7 @@ import javax.persistence.Query;
  */
 public class AlunoDao {
     private static EntityManagerFactory entityManagerFactory = 
-            Persistence.createEntityManagerFactory("sistemaEscolaMySQL");
+            Persistence.createEntityManagerFactory("sistemaEscolaPostgreSQL");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
     
     public Aluno cadastrarAluno(Aluno aluno){

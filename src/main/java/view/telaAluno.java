@@ -32,6 +32,7 @@ public class telaAluno extends javax.swing.JInternalFrame {
         //this.setLocationRelativeTo(null);
         this.txtMatricula.setEnabled(false);
         this.txtNomeTurma.setEnabled(false);
+        this.txtCodigoturma.setEnabled(false);
     }
 
     public telaAluno(Aluno aluno) {

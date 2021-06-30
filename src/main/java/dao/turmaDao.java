@@ -19,7 +19,7 @@ import javax.persistence.Query;
  */
 public class TurmaDao {    
     private static EntityManagerFactory entityManagerFactory = 
-            Persistence.createEntityManagerFactory("sistemaEscolaMySQL");
+            Persistence.createEntityManagerFactory("sistemaEscolaPostgreSQL");
     private static EntityManager entityManager = entityManagerFactory.createEntityManager();
     
     
@@ -57,7 +57,12 @@ public class TurmaDao {
     }
     
     public List<Turma> buscarTurmasFiltrado(Turma t, Integer pcd){
-        String sql = "Select distinct t From Turma t, Aluno a where 1 = 1";
+        String sql = "Select distinct t From Turma t"; 
+        if(pcd!=2){
+         sql = sql.concat(" ,Aluno a");
+        }
+         sql = sql.concat(" where 1 = 1");   
+                
         
         if(t.getCodigo()!= null){
             sql = sql.concat(" and t.codigo = :codigo");
@@ -78,7 +83,7 @@ public class TurmaDao {
         /*if(pcd != null){
             sql = sql.concat(" and (a.turma = :turma and a.PCD in (:pcd))");
         }*/
-        
+        sql = sql.concat(" order by t.codigo");
         Query query = entityManager.createQuery(sql, Turma.class);
         
         if(t.getCodigo() != null){
